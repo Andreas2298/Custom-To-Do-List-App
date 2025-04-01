@@ -14,9 +14,19 @@ function addTask(taskText = "", completed = false) {
   }
 
   li.addEventListener("click", () => {
-    li.classList.toggle("completed");
+    if (!li.classList.contains("completed")) {
+      li.classList.toggle("completed");
+    } else {
+      const newText = prompt(
+        "Edit task:",
+        li.querySelector("span").textContent.trim()
+      );
 
-    saveTheTasks();
+      if (newText && newText !== li.querySelector("span").textContent.trim()) {
+        li.querySelector("span").textContent = newText;
+        saveTheTasks();
+      }
+    }
   });
 
   const taskTextNode = document.createElement("span");
